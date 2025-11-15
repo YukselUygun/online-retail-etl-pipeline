@@ -1,0 +1,132 @@
+2025-11-16 00:20:58,952 | INFO | === Online Retail ETL Pipeline started ===
+2025-11-16 00:20:59,114 | INFO | ETL started.
+2025-11-16 00:20:59,114 | INFO | Reading CSV file...
+2025-11-16 00:20:59,485 | INFO | Transforming data...
+2025-11-16 00:20:59,789 | INFO | Loading data into stg_retail...
+2025-11-16 00:21:03,480 | ERROR | ETL failed with an unexpected error.
+Traceback (most recent call last):
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\engine\base.py", line 2114, in _exec_insertmany_context
+    dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\engine\default.py", line 943, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "total_price" of relation "stg_retail" does not exist
+LINE 1: ..., invoice_date, unit_price, customer_id, country, total_pric...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\YÜKSEL UYGUN\OneDrive\Masaüstü\online-retail-etl-pipeline\scripts\etl_retail.py", line 185, in main
+    summary = run_etl(engine, config["paths"]["data_file"])
+  File "C:\Users\YÜKSEL UYGUN\OneDrive\Masaüstü\online-retail-etl-pipeline\scripts\etl_retail.py", line 133, in run_etl
+    ]].to_sql("stg_retail", engine, if_exists="append", index=False)
+       ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\util\_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\generic.py", line 3087, in to_sql
+    return sql.to_sql(
+           ~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<8 lines>...
+        method=method,
+        ^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\sql.py", line 842, in to_sql
+    return pandas_sql.to_sql(
+           ~~~~~~~~~~~~~~~~~^
+        frame,
+        ^^^^^^
+    ...<9 lines>...
+        **engine_kwargs,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\sql.py", line 2018, in to_sql
+    total_inserted = sql_engine.insert_records(
+        table=table,
+    ...<7 lines>...
+        **engine_kwargs,
+    )
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\sql.py", line 1567, in insert_records
+    raise err
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\sql.py", line 1558, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\sql.py", line 1119, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\sql.py", line 1010, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\engine\base.py", line 1415, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\engine\base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\engine\base.py", line 1840, in _execute_context
+    return self._exec_insertmany_context(dialect, context)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\engine\base.py", line 2122, in _exec_insertmany_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e,
+        ^^
+    ...<4 lines>...
+        is_sub_exec=True,
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\engine\base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\engine\base.py", line 2114, in _exec_insertmany_context
+    dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\YÜKSEL UYGUN\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\engine\default.py", line 943, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column "total_price" of relation "stg_retail" does not exist
+LINE 1: ..., invoice_date, unit_price, customer_id, country, total_pric...
+                                                             ^
+
+[SQL: INSERT INTO stg_retail (invoice_no, stock_code, description, quantity, invoice_date, unit_price, customer_id, country, total_price, is_cancelled, customer_valid) VALUES (%(invoice_no__0)s, %(stock_code__0)s, %(description__0)s, %(quantity__0)s, %(inv ... 237607 characters truncated ... r_id__999)s, %(country__999)s, %(total_price__999)s, %(is_cancelled__999)s, %(customer_valid__999)s)]
+[parameters: {'customer_valid__0': True, 'customer_id__0': 17850.0, 'invoice_date__0': datetime.datetime(2010, 12, 1, 8, 26), 'unit_price__0': 2.55, 'invoice_no__0': '536365', 'stock_code__0': '85123A', 'total_price__0': 15.299999999999999, 'description__0': 'WHITE HANGING HEART T-LIGHT HOLDER', 'is_cancelled__0': False, 'quantity__0': 6, 'country__0': 'United Kingdom', 'customer_valid__1': True, 'customer_id__1': 17850.0, 'invoice_date__1': datetime.datetime(2010, 12, 1, 8, 26), 'unit_price__1': 3.39, 'invoice_no__1': '536365', 'stock_code__1': '71053', 'total_price__1': 20.34, 'description__1': 'WHITE METAL LANTERN', 'is_cancelled__1': False, 'quantity__1': 6, 'country__1': 'United Kingdom', 'customer_valid__2': True, 'customer_id__2': 17850.0, 'invoice_date__2': datetime.datetime(2010, 12, 1, 8, 26), 'unit_price__2': 2.75, 'invoice_no__2': '536365', 'stock_code__2': '84406B', 'total_price__2': 22.0, 'description__2': 'CREAM CUPID HEARTS COAT HANGER', 'is_cancelled__2': False, 'quantity__2': 8, 'country__2': 'United Kingdom', 'customer_valid__3': True, 'customer_id__3': 17850.0, 'invoice_date__3': datetime.datetime(2010, 12, 1, 8, 26), 'unit_price__3': 3.39, 'invoice_no__3': '536365', 'stock_code__3': '84029G', 'total_price__3': 20.34, 'description__3': 'KNITTED UNION FLAG HOT WATER BOTTLE', 'is_cancelled__3': False, 'quantity__3': 6, 'country__3': 'United Kingdom', 'customer_valid__4': True, 'customer_id__4': 17850.0, 'invoice_date__4': datetime.datetime(2010, 12, 1, 8, 26), 'unit_price__4': 3.39, 'invoice_no__4': '536365', 'stock_code__4': '84029E' ... 10900 parameters truncated ... 'stock_code__995': '22100', 'total_price__995': 1.25, 'description__995': 'SKULLS SQUARE TISSUE BOX', 'is_cancelled__995': False, 'quantity__995': 1, 'country__995': 'United Kingdom', 'customer_valid__996': True, 'customer_id__996': 14729.0, 'invoice_date__996': datetime.datetime(2010, 12, 1, 12, 43), 'unit_price__996': 1.25, 'invoice_no__996': '536520', 'stock_code__996': '22096', 'total_price__996': 1.25, 'description__996': 'PINK PAISLEY SQUARE TISSUE BOX ', 'is_cancelled__996': False, 'quantity__996': 1, 'country__996': 'United Kingdom', 'customer_valid__997': True, 'customer_id__997': 14729.0, 'invoice_date__997': datetime.datetime(2010, 12, 1, 12, 43), 'unit_price__997': 2.55, 'invoice_no__997': '536520', 'stock_code__997': '22583', 'total_price__997': 2.55, 'description__997': 'PACK OF 6 HANDBAG GIFT BOXES', 'is_cancelled__997': False, 'quantity__997': 1, 'country__997': 'United Kingdom', 'customer_valid__998': True, 'customer_id__998': 14729.0, 'invoice_date__998': datetime.datetime(2010, 12, 1, 12, 43), 'unit_price__998': 1.25, 'invoice_no__998': '536520', 'stock_code__998': '21358', 'total_price__998': 2.5, 'description__998': 'TOAST ITS - HAPPY BIRTHDAY', 'is_cancelled__998': False, 'quantity__998': 2, 'country__998': 'United Kingdom', 'customer_valid__999': True, 'customer_id__999': 14729.0, 'invoice_date__999': datetime.datetime(2010, 12, 1, 12, 43), 'unit_price__999': 1.25, 'invoice_no__999': '536520', 'stock_code__999': '21123', 'total_price__999': 1.25, 'description__999': 'SET/10 IVORY POLKADOT PARTY CANDLES', 'is_cancelled__999': False, 'quantity__999': 1, 'country__999': 'United Kingdom'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-11-16 00:27:16,938 | INFO | === Online Retail ETL Pipeline started ===
+2025-11-16 00:27:16,971 | INFO | ETL started.
+2025-11-16 00:27:16,971 | INFO | Reading CSV file...
+2025-11-16 00:27:17,356 | INFO | Transforming data...
+2025-11-16 00:27:17,642 | INFO | Loading data into stg_retail...
+2025-11-16 00:27:34,304 | INFO | Loading data into retail_clean...
+2025-11-16 00:27:50,983 | INFO | ETL finished successfully.
+2025-11-16 00:27:51,009 | INFO | ETL completed in 34.07 seconds.
